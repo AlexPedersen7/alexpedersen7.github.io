@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!--
+	Program Name: 	Homework 1 Thank You Page
+	Author: 		Alexander Pedersen
+	Date Created: 	2/4/2026 4:25 PM
+	Date Modified:	2/19/2026 11:44 AM
+	Version:		1.3
+	Description:
+					Create a medical intake form to register a new
+					patient account and capture demographic and 
+					relevant medical information.
+	To do:
+		- [ ] Make range slider look cooler see w3schools
+		
+-->
+<html lang="en">
+	<head>
+		<title>HW1 Thank you</title>
+		<link rel="stylesheet" href="styles.css" />
+		<meta charset="UTF-8" />
+	</head>
+	<body>
+        <main class="main-content">
+            <!-- Heading / Title Section -->
+            <header class="container header">
+                <!-- Logo for top left -->
+                <a href="patient-form.htm">
+				    <img src="LastResort_Logo.png" alt="The Last Resort Logo" class="logo"/>
+			    </a>
+                <p>
+                    <!-- Bolded Page Title -->
+                    <span class="main-title"> 
+                        Last Resort Medical LLC <br> (Non-Indemnified) </span>
+                    <br>
+                    <!-- Current Date and Time here -->
+                    <span>Today's Date is: <span id="today-date"></span> </span>
+                </p>
+            </header>
+            <hr>
+            <!-- Main Content Section -->
+            <div class="container">
+                <div class="subcontainer">
+                    <span class="centered">
+                        Thank you for your submission
+                    </span>
+                </div>   
+            </div>
+        </main>
+        <!-- Footer Section -->
+        <hr>
+        <footer class="footer ">
+            <div class="container subcontainer">
+                <span>
+                    Richmond TX 77406
+                </span>
+                <span>
+                    Last Resort Medical LLC (Non-Indemnified)
+                </span>
+                <!-- The link is just a random article I like about hexagons, the bestagons -->
+                <a href="https://www.redblobgames.com/grids/hexagons/">
+                    CONTACT US
+                </a>
+            </div>
+        </footer>
+	</body>
+
+    <!-- JavaScript / JS / Script Section -->
+	<!-- I know I can make it on one line, I prefer the readability -->
+	<script>
+		const today = new Date();
+		const formattedDate = today.toLocaleDateString();
+		document.getElementById("today-date").innerText = formattedDate;
+	</script>
+</html>

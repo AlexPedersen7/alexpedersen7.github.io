@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<!--
+	Program Name: 	Homework 2 Transaction Processing
+	Author: 		Alexander Pedersen
+	Date Created: 	3/12/2026
+	Date Modified:	3/12/2026
+	Version:		2.0
+	Description:
+					Create a medical intake form to register a new
+					patient account and capture demographic and 
+					relevant medical information.
+					Current version including external JS among
+					other additions.
+	To do:
+		
+-->
+<html lang="en">
+	<head>
+		<title>HW1 Patient Form</title>
+		<link rel="stylesheet" href="styles.css" />
+		<meta charset="UTF-8" />
+		<script src="script.js" defer></script>
+	</head>
+	<body>
+		<!-- Heading / Title Section -->
+            <header class="container header">
+                <!-- Logo for top left -->
+                <a href="patient-form.htm">
+				    <img src="LastResort_Logo.png" alt="The Last Resort Logo" class="logo"/>
+			    </a>
+                <p>
+                    <!-- Bolded Page Title -->
+                    <span class="main-title"> 
+                        Last Resort Medical LLC <br> (Non-Indemnified) </span>
+                    <br>
+                    <!-- Current Date and Time here -->
+                    <span>Today's Date is: <span id="today-date"></span> </span>
+                </p>
+            </header>
+		<hr>
+		<form id="main-form" action="thank-you.html" method="get">
+		<!-- Main Content Section -->
+			<div class="container">
+				<div class="subcontainer">
+					<span class="centered">
+						Bolded borders on fields are required.
+					</span>
+					<table cellspacing="10px">
+						<!-- Name Row -->
+						<tr>
+							<td>Name:</td>
+							<td>
+								<!-- First Name -->
+								<input type="text" 
+										name="First-Name" 
+										id="fname"
+										oninput="checkFirstName()"
+										onblur="checkFirstName()"
+										placeholder="First Name" 
+										maxlength="30" 
+										pattern="^[A-Za-z'\-]{2,30}$"
+										title="2 to 30 Characters. A-Z , ' and - Valid."
+										required
+								/>
+							</td>
+							<td>
+								<!-- Middle Initial -->
+								<input type="text" 
+										name="Middle-Initial" 
+										id="middlei"
+										onblur="checkMiddleInitial()"
+										placeholder="MI"
+										pattern="^[A-Za-z]*$" 
+										title="1 Character. A-Z valid. Not required."
+										maxlength="1" />
+							</td>
+							<td>
+								<!-- Last Name -->
+								<input type="text" 
+										name="Last-Name" 
+										id="lastName"
+										onblur="checkLastName()"
+										placeholder="Last Name" 
+										maxlength="30" 
+										pattern="^[A-Za-z'2-5\-]{2,30}$"
+										title="2 to 30 Characters. A-z 2-5 ' and - valid."
+										required />
+							</td>
+							<td id="name-error">
+
+							</td>
+						</tr>
+						<!-- Date of Birth Row -->
+						<tr>
+							<td>Date of Birth:</td>
+							<td>
+								<input type="date" 
+										name="Date-of-Birth"
+										id="date-of-birth"
+										onblur="checkDOB()"
+										required />
+							</td>
+							<td></td>
+							<td></td>
+							<td id="dob-error"></td>
+						</tr>
+						<!-- Primary Address Row -->
+						<tr>
+							<td>Primary Address:</td>
+							<td>
+								<input type="text" 
+										name="Address1" 
+										id="address1"
+										placeholder="Street Address" 
+										maxlength="30" 
+										pattern="^[A-Za-z0-9 .\-]{2,30}$"
+										title="2 to 30 Characters. A-z . and - valid."
+										oninput="checkAddress(1)"
+										required />
+							</td>
+							<td></td>
+							<td></td>
+							<td id="error-address1"></td>
+						</tr>
+						<!-- Secondary Address Row -->
+						<tr>
+							<td>Secondary Address:</td>
+							<td>
+								<input type="text" 
+										name="Address2"
+										id="address2" 
+										placeholder="Street Address"
+										pattern="^[A-Za-z0-9.\-]{0,30}$"
+										title="2 to 30 Characters. A-z . and - valid."
+										oninput="checkAddress(2)" 
+										maxlength="30" />
+							</td>
+							<td></td>
+							<td></td>
+							<td id="error-address2"></td>
+						</tr>
+						<!-- City, State Row -->
+						<tr>
+							<!-- City -->
+							<td>City</td>
+							<td>
+								<input type="text"
+										name="City"
+										id="city"
+										placeholder="City"
+										pattern="^[A-Za-z\-]{2,30}$"
+										title="2 to 30 characters. A-z and - valid."
+										oninput="checkCity()"
+										maxlength="30" 
+										required />
+							</td>
+							<!-- State -->
+							<td>State</td>
+							<td>
+								<!-- The list dropdown for state -->
+								<select name="State" 
+										id="state"
+										onblur="checkState()"
+										required>
+									<option value="" selected disabled>Select a state</option>
+									<option value="AL">Alabama</option>
+									<option value="AK">Alaska</option>
+									<option value="AZ">Arizona</option>
+									<option value="AR">Arkansas</option>
+									<option value="CA">California</option>
+									<option value="CO">Colorado</option>
+									<option value="CT">Connecticut</option>
+									<option value="DE">Delaware</option>
+									<option value="DC">District Of Columbia</option>
+									<option value="FL">Florida</option>
+									<option value="GA">Georgia</option>
+									<option value="HI">Hawaii</option>
+									<option value="ID">Idaho</option>
+									<option value="IL">Illinois</option>
+									<option value="IN">Indiana</option>
+									<option value="IA">Iowa</option>
+									<option value="KS">Kansas</option>
+									<option value="KY">Kentucky</option>
+									<option value="LA">Louisiana</option>
+									<option value="ME">Maine</option>
+									<option value="MD">Maryland</option>
+									<option value="MA">Massachusetts</option>
+									<option value="MI">Michigan</option>
+									<option value="MN">Minnesota</option>
+									<option value="MS">Mississippi</option>
+									<option value="MO">Missouri</option>
+									<option value="MT">Montana</option>
+									<option value="NE">Nebraska</option>
+									<option value="NV">Nevada</option>
+									<option value="NH">New Hampshire</option>
+									<option value="NJ">New Jersey</option>
+									<option value="NM">New Mexico</option>
+									<option value="NY">New York</option>
+									<option value="NC">North Carolina</option>
+									<option value="ND">North Dakota</option>
+									<option value="OH">Ohio</option>
+									<option value="OK">Oklahoma</option>
+									<option value="OR">Oregon</option>
+									<option value="PA">Pennsylvania</option>
+									<option value="RI">Rhode Island</option>
+									<option value="SC">South Carolina</option>
+									<option value="SD">South Dakota</option>
+									<option value="TN">Tennessee</option>
+									<option value="TX">Texas</option>
+									<option value="UT">Utah</option>
+									<option value="VT">Vermont</option>
+									<option value="VA">Virginia</option>
+									<option value="WA">Washington</option>
+									<option value="WV">West Virginia</option>
+									<option value="WI">Wisconsin</option>
+									<option value="WY">Wyoming</option>
+								</select>
+							</td>
+							<td id="error-location"></td>
+						</tr>
+						<!-- ZIP Row -->
+						<tr>
+							<!-- Zip -->
+							<td>Zip</td>
+							<td>
+								<input type="text"
+										name="ZIP"
+										id="zip"
+										placeholder="Zip Code"
+										oninput="checkZIP()"
+										pattern="^[0-9\-]{5,10}$"
+										title="5 to 10 digits. 0 to 9 and - valid."
+										maxlength="10" 
+										required />
+							</td>
+							<td></td>
+							<td></td>
+							<td id="error-zip"></td>
+						</tr>
+						<!-- SSN -->
+						<tr>
+							<td>
+								SSN
+							</td>
+							<td>
+								<input type="password"
+										name="SSN"
+										id="ssn"
+										placeholder="XXX-XX-XXXX"
+										pattern="^[0-9]{3}-[0-9]{2}-[0-9]{4}$"
+										title="11 characters, 0 to 9 and - valid."
+										oninput="checkSSN()"
+										maxlength="11" 
+										required />
+							</td>
+							<td></td>
+							<td></td>
+							<td id="error-ssn"></td>
+						</tr>
+						<!-- Phone number -->
+						<tr>
+							<td> Phone Number </td>
+							<td>
+								<input type="tel"
+										name="Phone-Number"
+										id="phone-number"
+										placeholder="XXX-XXX-XXXX"
+										pattern="^[0-9]{3}-[0-9]{3}-[0-9]{4}$"
+										title="12 characters, 0 to 9 and - valid."
+										oninput="checkPhoneNumber()"
+										maxlength="12"
+										required />
+							</td>	
+							<td></td>
+							<td></td>
+							<td id="error-phone-number"></td>
+						</tr>
+						<!-- Email -->
+						<tr>
+							<td>Email</td>
+							<td>
+								<input type="email"
+										name="Email"
+										id="email"
+										placeholder="Enter Valid Email"
+										pattern="^(?=.{1,30}$)[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$"
+										title="6 - 30 Characters. Must include @ and ."
+										oninput="checkEmail()"
+										maxlength="30" 
+										required />
+							</td>
+							<td></td>
+							<td></td>
+							<td id="error-email"></td>
+						</tr>
+						<!-- User ID -->
+						<tr>
+							<td>User ID</td>
+							<td>
+								<input type="text"
+										name="userID"
+										id="userid"
+										placeholder="User ID"
+										pattern="^[A-Za-z0-9_\-]{5,30}$"
+										title="5 - 30 Characters. Letters and Numbers allowed if doesnt start with a number."
+										oninput="checkUserID()"
+										maxlength="30" 
+										required />
+							</td>
+							<td></td>
+							<td></td>
+							<td id="error-userid"></td>
+						</tr>
+						<!-- Password 1st Entry -->
+						<tr>
+							<td>Password</td>
+							<td>
+								<input type="password"
+										name="Password1"
+										id="password1"
+										placeholder="Enter Password"
+										pattern="(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,30}"
+										title="8 to 30 Characters. Letters, numbers, and special characters allowed."
+										oninput="checkPassword(1)"
+										maxlength="30" 
+										required />
+							</td>
+							<td></td>
+							<td></td>
+							<td id="error-password1"></td>
+						</tr>
+						<!-- Password 2nd Entry -->
+						<tr>
+							<td> Password</td>
+							<td>
+								<input type="password"
+										name="Password2"
+										id="password2"
+										placeholder="Re-type Password"
+										pattern="(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,30}"
+										title="8 to 30 Characters. Letters, numbers, and special characters allowed."
+										oninput="checkPassword(2)"
+										maxlength="30" 
+										required />
+							</td>
+							<td></td>
+							<td></td>
+							<td id="error-password2"></td>
+						</tr>
+					</table>
+				</div>
+				<div>
+					<hr>
+				</div>
+				<!-- Questionarie Section beings -->
+				<div class="subcontainer">
+					<table cellspacing="10px" style="margin-bottom:0;">
+						<!-- Gender Row -->
+						<tr>
+							<td>Gender</td>
+							<!-- Male Button -->
+							<td>
+								<input type="radio"
+										name="Gender"
+										value="Male"
+										id="male-gender" 
+										required />
+								<label for="male-gender"> Male </label>
+							</td>
+							<!-- Female Button -->
+							<td>
+								<input type="radio"
+										name="Gender"
+										value="Female"
+										id="female-gender" 
+										required />
+								<label for="female-gender">Female</label>
+							</td>
+							<!-- Other Button -->
+							<td>
+								<input type="radio"
+										name="Gender"
+										value="Other"
+										id="other-gender" 
+										required />
+								<label for="other-gender">Other</label>
+							</td>
+						</tr>
+						<!-- Insured? Row -->
+						<tr>
+							<td>Insured?</td>
+							<!-- Yes button -->
+							<td>
+								<input type="radio"
+										name="Insured"
+										value="Yes"
+										id="yes-insured" 
+										required />
+								<label for="yes-insured">Yes</label>
+							</td>
+							<!-- No button -->
+							<td>
+								<input type="radio"
+										name="Insured"
+										value="No"
+										id="no-insured" 
+										required />
+								<label for="no-insured">No</label>
+							</td>
+						</tr>
+						<!-- Anesthesia Row -->
+						<tr>
+							<td>Anesthesia</td>
+							<!-- Yes button -->
+							<td>
+								<input type="radio"
+										name="Anesthesia"
+										value="Yes"
+										id="yes-anesthesia" />
+								<label for="yes-anesthesia">Yes</label>
+							</td>
+							<!-- No button -->
+							<td>
+								<input type="radio"
+										name="Anesthesia"
+										value="No"
+										id="no-anesthesia" />
+								<label for="no-anesthesia">No</label>
+							</td>
+							<!-- Surprise Button -->
+							<td>
+								<input type="radio"
+										name="Anesthesia"
+										value="Surprise"
+										id="surprise-anesthesia" />
+								<label for="surprise-anesthesia">Surprise</label>
+							</td>
+						</tr>
+					</table>
+					<!-- Leave table to have unrestricted pain slider -->
+					<!-- Pain Scale Slider Row -->
+					<div id="slider-div">
+						Pain Scale &nbsp;&nbsp;&nbsp;
+						<span>0</span>
+						<div style="position: relative; display: inline-block; width:50%">
+							<span id="pain-tooltip">0</span>	
+							<input type="range"
+											name="Pain"
+											id="pain"
+											oninput="updateSlider()"
+											min="0"
+											max="10"
+											step="1"
+											value="0" />
+							</div>
+						<span>10</span>
+					</div>
+					<!-- New Table for checklist -->
+					<table cellspacing="10px">
+						<!-- First row -->
+						<tr>
+							<td>Background</td>
+							<!-- Antiobitics -->
+							<td>
+								<input type="checkbox"
+										name="Background"
+										value="Antibiotics" />
+							</td>
+							<td>
+								Are you on antibiotics?
+							</td>
+						</tr>
+						<!-- Second row -->
+						<tr>
+							<td></td>
+							<!-- Pregnant -->
+							<td>
+								<input type="checkbox"
+										name="Background"
+										value="Pregnant" />
+							</td>
+							<td>
+								Are you pregnant?
+							</td>
+						</tr>
+						<!-- Third Row -->
+						<tr>
+							<td></td>
+							<!-- Mesothelioma -->
+							<td>
+								<input type="checkbox"
+										name="Background"
+										value="Mesothelioma" />
+							</td>
+							<td>
+								Have you or a loved one had Mesothelioma?
+							</td>
+						</tr>
+						<!-- Fourth Row -->
+						<tr>
+							<td></td>
+							<!-- Car Crash -->
+							<td>
+								<input type="checkbox"
+										name="Background"
+										value="Car-Crash" />
+							</td>
+							<td>
+								Have you been in a car crash?
+							</td>
+						</tr>
+						<!-- Fifth Row -->
+						<tr>
+							<td></td>
+							<!-- Lawyer -->
+							<td>
+								<input type="checkbox"
+										name="Background"
+										value="Lawyer" />
+							</td>
+							<td>
+								Do you have a lawyer?
+							</td>
+						</tr>
+					</table>
+					<!-- Additional Info Section -->
+					<table>
+						<tr>
+							<td style="vertical-align: top;"> Additional Info</td>
+							<td>
+								<textarea id="additional-info"
+										name="Additional-Info"
+										rows="5"
+										cols="100"></textarea>
+							</td>
+						</tr>
+					</table>
+					<!-- Submit and Reset buttons -->
+					<div class="button-group">
+						<button type="submit" class="submit-button">Submit Form</button>
+						<button type="button" id="review-button" onclick="reviewData(); validateForm();">Review Data</button>
+						<button type="reset" class="reset-button">Clear Form</button>
+					</div>
+				</div>
+			</div>
+		</form>
+		<!-- Review data section: Should be hidden by default -->
+		<span id="review-data-section" class="hidden">
+			<hr>
+			<!-- idk why container and subcontainer here: double check -->
+			<div class="container subcontainer">
+				<div class="centered">
+					Reveal Sensitive Information?
+					<input type="checkbox" id="sensitive-info" onchange="reviewData();" />
+				</div>
+				<div id="review-data">	
+					
+				</div>
+			</div>
+		</span>
+		<!-- Footer Section -->
+		<hr>
+        <footer class="footer ">
+            <div class="container subcontainer">
+                <span>
+                    Richmond TX 77406
+                </span>
+                <span>
+                    Last Resort Medical LLC (Non-Indemnified)
+                </span>
+				<!-- The link is just a random article I like about hexagons, the bestagons -->
+                <a href="https://www.redblobgames.com/grids/hexagons/">
+                    CONTACT US
+                </a>
+            </div>
+        </footer>
+	</body>
+	<!-- Move date JS into external file -->
+</html>
