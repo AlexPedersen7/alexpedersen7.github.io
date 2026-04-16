@@ -1,0 +1,204 @@
+/*
+    Program Name: 	Homework 1 Transaction Processing CSS 
+	Author: 		Alexander Pedersen
+	Date Created: 	2/4/2026 4:25 PM
+	Date Modified:	2/19/2026 11:37 AM
+	Version:		1.2
+	Description:
+					CSS stylesheet for Homework 1 Transaction
+                    Processing.
+*/
+
+/* VARIABLES */
+
+:root {
+    --bg-color: rgb(232, 232, 232);
+    --sub-bg: #E8E2D8;
+    --primary-font: 'Lucida Sans', 'Lucida Grande', sans-serif;
+    --success-green: #88f283;
+    --danger-red: #f28383;
+    --transition-speed: 0.3s;
+    --shadow-color: rgba(0, 0, 0, 0.5);
+    --pref-gray: #ccc;
+}
+
+/*
+    BASE STYLES
+*/
+
+html, body{
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    font-size: 1.3rem;
+    font-family: var(--primary-font);
+    background-color: var(--bg-color);
+    /* testing */
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    flex: 1;
+}
+
+/* Ensure form elements inherit the body font */
+input, select, button {
+    font-size: inherit;
+}
+
+button {
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--transition-speed);
+}
+
+/* CONTAINERS */
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 40px;
+}
+
+.subcontainer {
+    background-color: var(--sub-bg);
+    border-radius: 20px;
+    padding: 20px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* HEADER */
+
+header {
+    display: flex; 
+    align-items: center; 
+    gap: 20px;
+}
+
+/* FOOTER */
+
+footer.footer {
+    display: flex; 
+    justify-content: center;
+    width: 100%;
+    margin-top: auto; /* Pushes footer to the bottom if content is short */
+    margin-bottom: 20px;
+}
+
+footer.footer .subcontainer {
+    display: flex;
+    justify-content: space-between; /* This spreads items apart */
+    align-items: center;
+    gap: 20px; /* Backup spacing */
+}
+
+/* REVIEW SECTION */
+
+.review-table {
+    border-spacing: 60px 5px;
+    margin: 0 auto;
+    width: 75%;
+}
+
+/*
+    FORM ELEMENTS
+*/
+input:required {
+    border-width: 2px;
+}
+
+input:focus {
+    box-shadow: 0 0 1em 8px var(--shadow-color);
+    transition: var(--transition-speed);
+}
+
+input[type="range"] {
+    width: 100%;
+    cursor: pointer;
+}
+
+/*
+    COMPONENTS (Buttons, Logos, Titles)
+*/
+.main-title {
+    font-size: 3rem;
+}
+
+.logo {
+    width: 160px;
+    height: 160px;
+    object-fit: contain;
+}
+
+#middlei {
+    width: 25px;
+}
+
+#slider-div {
+    padding: 10px 10px 0 10px;
+}
+
+
+#pain-tooltip {
+    position: absolute; 
+    left: 50%;
+    /* Centers it instead of to the right- weird behavior */
+    transform: translateX(-50%); 
+    /* Gets it off the knob- could do top if i wanted it below */
+    bottom: 20px; 
+    pointer-events: none;
+}
+
+/* Button Grouping */
+.button-group {
+    display: flex;
+    gap: 50px;
+    margin: 20px 0;
+    justify-content: center;
+}
+
+.submit-button {
+    background-color: var(--success-green);
+}
+.submit-button:hover {
+    background-color: green;
+}
+
+.reset-button {
+    background-color: var(--danger-red);
+    color: white;
+}
+.reset-button:hover {
+    background-color: red;
+}
+
+#review-button, #validate-button {
+    background-color:white;
+}
+#review-button:hover, #validate-button:hover {
+    background-color: var(--pref-gray);
+}
+
+
+/*
+    UTILITIES (Helper Classes)
+*/
+.centered {
+    display: block;
+    text-align: center;
+}
+
+hr {
+    border: none;
+    border-top: 2px solid var(--pref-gray);
+    margin: 10px;
+}
+
+.hidden {
+    display: none;
+}
